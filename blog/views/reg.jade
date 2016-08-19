@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  form(method="post")
+    .form-group
+      label(for="name") 用户名：
+      input.form-control(type="text", name="name",placeholder="请输入用户名", style="width: 300px;")
+    .form-group
+      label(for="password") 密码：
+      input.form-control(type="password", name="password",placeholder="请输入密码", style="width: 300px;")
+    .form-group
+      label(for="password-repeat") 确认密码：
+      input.form-control(type="password", name="password-repeat",placeholder="请再次输入密码", style="width: 300px;")
+    .form-group
+      label(for="email") 邮箱：
+      input.form-control(type="email", name="email",placeholder="请输入邮箱地址", style="width: 300px;")
+    button.btn.btn-default(type="submit") 注册

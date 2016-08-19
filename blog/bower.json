@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "description": "",
+  "main": "",
+  "authors": [
+    "tiano1996 <circle4tiano@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tiano1996/my_blog",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
