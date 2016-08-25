@@ -7,6 +7,6 @@ block content
         a(href="#") #{item.title}
       p 作者：
         a(href="#") #{item.author.name}
-        | &nbsp;&nbsp;日期：#{moment(item.meta.updateAt).format('ddd, YYYY/MM/DD h:mm:s a')}
-      p #{item.content}
-      
+        | &nbsp;&nbsp;|&nbsp;&nbsp;日期：#{moment(item.meta.updateAt).format('ddd, YYYY/MM/DD h:mm:s a')}
+      p !{item.content}
+      hr

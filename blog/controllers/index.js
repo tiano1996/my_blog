@@ -1,5 +1,6 @@
 var Article = require('../models/article');
 
+var markdown = require('markdown').markdown;
 // index page
 exports.index = function(req, res) {
 
@@ -7,6 +8,10 @@ exports.index = function(req, res) {
     .find({})
     .populate('author', 'name')
     .exec(function(err, articles) {
+      articles.forEach(function(article) {
+        article.content = markdown.toHTML(article.content);
+      });
+
       res.render('index', {
         blogTitle: 'My Blog',
         title: '首页',
