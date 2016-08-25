@@ -1,4 +1,6 @@
 var express = require('express');
+var mongoose = require('mongoose');
+var dbUrl = 'mongodb://localhost:27017/blog';
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,7 +11,8 @@ var MongoStore = require('connect-mongo')(session);
 
 
 var routes = require('./routes/index');
-var settings = require('./settings');
+mongoose.connect(dbUrl);
+// var settings = require('./settings');
 var flash = require('connect-flash');
 
 var app = express();
@@ -17,11 +20,11 @@ var app = express();
 app.use(session({
   resave: false, // fix the 'express-session' warring
   saveUninitialized: true, // fix the 'express-session' warring
-  secret: settings.cookieSecret,
-  key: settings.db,
+  secret: 'my_blog',
+  // key: settings.db,
   cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},
   store: new MongoStore({
-    url: 'mongodb://localhost:12345/blog'
+    url: dbUrl
   })
 }));
 
