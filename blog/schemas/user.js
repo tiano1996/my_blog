@@ -14,7 +14,7 @@ var UserSchema = new mongoose.Schema({
     default: 0
   },
   meta: {
-    creatAt: {
+    createAt: {
       type: Date,
       default: Date.now()
     },
@@ -25,6 +25,7 @@ var UserSchema = new mongoose.Schema({
   }
 });
 
+// save user
 UserSchema.pre('save', function(next){
   var user = this;
 
@@ -34,7 +35,7 @@ UserSchema.pre('save', function(next){
     this.updateAt = Date.now();
   }
 
-  bcrypt.getSalt(SALT_WORK_FACTOR, function(err, salt) {
+  bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
     if(err) return next(err);
 
     bcrypt.hash(user.password, salt, function(err, hash) {
@@ -45,6 +46,31 @@ UserSchema.pre('save', function(next){
     });
   });
 });
+
+// 密码验证
+UserSchema.methods = {
+  comparePassword: function(_password, cb) {
+    bcrypt.compare(_password, this.password, function(err, isMatch) {
+      if(err) return cb(err);
+
+      cb(null, isMatch);
+    });
+  }
+}
+
+UserSchema.statics = {
+  fetch: function(cb) {
+    return this
+      .find({})
+      .sort('meta.updateAt')
+      .exec(cb);
+  },
+  findById: function(id, cb) {
+    return this
+      .findOne({_id: id})
+      .exec(cb);
+  }
+}
 
 
 module.exports = UserSchema;

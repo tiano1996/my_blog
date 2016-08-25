@@ -1,4 +1,12 @@
 extends layout
 
 block content
-  article 这里是首页
+  article 
+    each item in articles
+      h2
+        a(href="#") #{item.title}
+      p 作者：
+        a(href="#") #{item.author.name}
+        | &nbsp;&nbsp;日期：#{moment(item.meta.updateAt).format('ddd, YYYY/MM/DD h:mm:s a')}
+      p #{item.content}
+      

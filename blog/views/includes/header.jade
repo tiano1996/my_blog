@@ -1,2 +1,17 @@
 h1 #{title}
 hr
+if success
+  .alert.alert-success.alert-dismissible
+    button.close(type="button", data-dismiss="alert", aria-label="Close")
+      span(aria-hidden="true") &times;
+    | #{success}
+if error
+  .alert.alert-danger.alert-dismissible
+    button.close(type="button", data-dismiss="alert", aria-label="Close")
+      span(aria-hidden="true") &times;
+    | #{error}
+if info
+  .alert.alert-info.alert-dismissible
+    button.close(type="button", data-dismiss="alert", aria-label="Close")
+      span(aria-hidden="true") &times;
+    | #{info}

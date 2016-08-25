@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  form(method="post")
+  form(method="post" action="/login")
     .form-group
       label(for="name") 用户名：
-      input.form-control(type="text", name="name",placeholder="请输入用户名", style="width: 300px;")
+      input.form-control(type="text", name="user[name]",placeholder="请输入用户名", style="width: 300px;")
     .form-group
       label(for="password") 密码：
-      input.form-control(type="password", name="password",placeholder="请输入密码", style="width: 300px;")
+      input.form-control(type="password", name="user[password]",placeholder="请输入密码", style="width: 300px;")
     button.btn.btn-default(type="submit") 登陆

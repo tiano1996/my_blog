@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  form(method="post", action="/article/new")
+    input(type="hidden", name="article[author]", value="#{user._id}")
+    .form-group
+      label(for="title") 文章标题
+      input.form-control(type="text", name="article[title]",placeholder="请输入文章标题")
+    .form-group
+      label(for="content") 文章正文：
+      textarea.form-control(name="article[content]", rows="10")
+    button.btn.btn-default(type="submit") 发表

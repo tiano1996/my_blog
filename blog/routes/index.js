@@ -1,25 +1,35 @@
 var Index = require('../controllers/index');
 var User = require('../controllers/user');
+var Article = require('../controllers/article');
 
 
 /* GET home page. */
 module.exports = function(app) {
-  app.get('/', Index.index);
-// module.exports = function(app) {
-//   // 显示首页
-//   app.get('/', function(req, res) {
-//     res.render('index', {
-//       blogTitle: 'My Blog',
-//       title: '主页'
-//     });
-//   });
-  // user
-  app.post('/reg', User.signup);
-  app.post('/login', User.signin);
-  app.get('/reg', User.showSignup);
-  app.get('/login', User.showSignin);
 
-  
+  // pre handle user
+  app.use(function(req, res, next) {
+    var _user = req.session.user;
+
+    app.locals.user = _user;
+
+    next();
+  });
+
+  // index
+  app.get('/', Index.index);
+
+  // user
+  app.post('/reg', User.checkNotLogin, User.signup);
+  app.post('/login', User.checkNotLogin, User.signin);
+  app.get('/reg', User.checkNotLogin, User.showSignup);
+  app.get('/login', User.checkNotLogin, User.showSignin);
+  app.get('/logout', User.checkLogin, User.logout);
+
+  // article
+  app.get('/article/new', User.checkLogin, Article.new);
+  app.post('/article/new', User.checkLogin, Article.postArticle);
+
+
 }
 
 //
